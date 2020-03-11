@@ -59,6 +59,14 @@ class CapitalAPI:
     except Exception as e:
       print("error！" + e)
 
+  def unlock_order_limit(self):
+    try:
+      # 1 == Future
+      nMarketType = 1
+      m_nCode = self.skO.UnlockOrder(nMarketType)
+      self.write_message("Order", m_nCode, "UnlockOrder")
+    except Exception as e:
+      print ("error！" + e)
 
 
 
