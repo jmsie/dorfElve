@@ -26,3 +26,18 @@ class CapitalAPI:
         print("Login fail: " + m_nCode)
     except Exception as e:
       print("Error: " + e)
+
+  def initialize_SKOrderLib(self):
+    try:
+      m_nCode = self.skO.SKOrderLib_Initialize()
+      self.write_message("Order", m_nCode, "SKOrderLib_Initialize")
+    except Exception as e:
+      messagebox.showerror("error！", e)
+
+  def write_message(self, str_type, nCode, str_message):
+    str_info = ""
+    if (nCode != 0):
+      str_info = "【" + self.skC.SKCenterLib_GetLastLogInfo() + "】"
+    print("【" + str_type + "】【" + str_message + "】【"
+          + self.skC.SKCenterLib_GetReturnCodeMessage(nCode) + "】" + str_info)
+
