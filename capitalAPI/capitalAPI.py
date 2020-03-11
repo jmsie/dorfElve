@@ -15,6 +15,7 @@ class CapitalAPI:
     self.config = {
       "id": "",
       "account": "",
+      "quantity_limit": "10", # quantity and order num / sec
     }
 
 
@@ -46,6 +47,19 @@ class CapitalAPI:
       self.write_message("Order", m_nCode, "ReadCertByID")
     except Exception as e:
       print(("error！" + e)
+
+  def set_order_limit(self):
+    try:
+      # 1 == Future
+      nMarketType = 1
+      m_nCode = self.skO.SetMaxQty(nMarketType, self.config['quantity_limit'])
+      self.write_message("Order", m_nCode, "SetMaxQty")
+      m_nCode = self.skO.SetMaxCount(nMarketType, self.config['quantity_limit'])
+      self.write_message("Order", m_nCode, "SetMaxCount")
+    except Exception as e:
+      print("error！" + e)
+
+
 
 
 
