@@ -34,8 +34,14 @@ class CapitalAPI:
     except Exception as e:
       print("Error: " + e)
 
+  def init_order(self):
+    self.initialize_SKOrderLib()
+    self.read_cert()
+    self.set_order_limit()
+
   def initialize_SKOrderLib(self):
     try:
+      print("Initializing SKOrderLib")
       m_nCode = self.skO.SKOrderLib_Initialize()
       self.write_message("Order", m_nCode, "SKOrderLib_Initialize")
     except Exception as e:
@@ -43,14 +49,17 @@ class CapitalAPI:
 
   def read_cert(self):
     try:
+      print("Read cert...")
       m_nCode = self.skO.ReadCertByID(self.config['id'])
       self.write_message("Order", m_nCode, "ReadCertByID")
     except Exception as e:
       print(("error！" + e)
 
-  def set_order_limit(self):
+  def set_order_limit(self, limit=10):
     try:
+      print("Set order limit to " + limit)
       # 1 == Future
+      self.config['quantity_limit'] = limit
       nMarketType = 1
       m_nCode = self.skO.SetMaxQty(nMarketType, self.config['quantity_limit'])
       self.write_message("Order", m_nCode, "SetMaxQty")
