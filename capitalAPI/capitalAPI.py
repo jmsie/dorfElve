@@ -12,6 +12,11 @@ class CapitalAPI:
     self.skQ = comtypes.client.CreateObject(sk.SKQuoteLib, interface=sk.ISKQuoteLib)
     self.skR = comtypes.client.CreateObject(sk.SKReplyLib, interface=sk.ISKReplyLib)
 
+    self.config = {
+      "id": "",
+      "account": "",
+    }
+
 
   def login(self, id, password):
     try:
@@ -20,6 +25,7 @@ class CapitalAPI:
       self.skC.SKCenterLib_Debug(os.path.split(os.path.realpath(__file__))[0] + "\\CapitalLog_Reply")
       if (m_nCode == 0):
         print("Login success: " + id)
+        self.config['id'] = id
       elif m_nCode == 151:
         print("Wrong password")
       else:
@@ -32,7 +38,16 @@ class CapitalAPI:
       m_nCode = self.skO.SKOrderLib_Initialize()
       self.write_message("Order", m_nCode, "SKOrderLib_Initialize")
     except Exception as e:
-      messagebox.showerror("error！", e)
+      print("error！" + e)
+
+  def read_cert(self):
+    try:
+      m_nCode = self.skO.ReadCertByID(self.config['id'])
+      self.write_message("Order", m_nCode, "ReadCertByID")
+    except Exception as e:
+      print(("error！" + e)
+
+
 
   def write_message(self, str_type, nCode, str_message):
     str_info = ""
