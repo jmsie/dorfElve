@@ -3,6 +3,7 @@ import comtypes.client
 from SKReplyLibEvent import SKReplyLibEvent
 from SKOrderLibEvent import SKOrderLibEvent
 from SKCenterLibEvent import SKCenterLibEvent
+from SKQuoteLibEvents import SKQuoteLibEvents
 from datetime import datetime
 
 comtypes.client.GetModule(os.path.split(os.path.realpath(__file__))[0] + r"/x64/SKCOM.dll")
