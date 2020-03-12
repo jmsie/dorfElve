@@ -1,8 +1,8 @@
 import os
 import comtypes.client
-import SKReplyLibEvent
-import SKOrderLibEvent
-import SKCenterLibEvent
+from SKOrderLibEvent import SKReplyLibEvent
+from SKOrderLibEvent import SKOrderLibEvent
+from SKCenterLibEvent import SKCenterLibEvent
 from datetime import datetime
 
 class CapitalAPI:
