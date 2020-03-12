@@ -68,7 +68,7 @@ class CapitalAPI:
 
   def set_order_limit(self, limit=10):
     try:
-      print("Set order limit to " + limit)
+      print("Set order limit to " + str(limit))
       # 1 == Future
       self.config['quantity_limit'] = limit
       nMarketType = 1
