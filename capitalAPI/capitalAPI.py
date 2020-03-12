@@ -1,6 +1,4 @@
 import os
-import sys
-sys.path.append('.events')
 import comtypes.client
 import SKReplyLibEvent
 import SKOrderLibEvent
