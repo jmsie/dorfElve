@@ -143,7 +143,7 @@ if __name__ == "__main__":
   api = CapitalAPI()
   api.login(id, password)
   api.set_account(account)
-  api.initialize_SKOrderLib()
+  api.init_order()
   exit()
   api.buy_at_market()
   api.sell_at_market(2)
