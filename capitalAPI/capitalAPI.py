@@ -54,6 +54,7 @@ class CapitalAPI:
   def init_order(self):
     self.initialize_SKOrderLib()
     self.read_cert()
+    self.get_user_account()
     self.set_order_limit()
 
   def init_reply_server(self):
@@ -69,6 +70,13 @@ class CapitalAPI:
     print("Read cert...")
     m_nCode = skO.ReadCertByID(self.config['id'])
     self.write_message("Order", m_nCode, "ReadCertByID")
+
+  def get_user_account(self):
+    try:
+      m_nCode = skO.GetUserAccount()
+      self.write_message("Order", m_nCode, "GetUserAccount")
+    except Exception as e:
+      print("error！" + str(e))
 
   def set_order_limit(self, limit=10):
     try:
