@@ -27,6 +27,9 @@ SKOrderLibEventHandler = comtypes.client.GetEvents(skO, SKOrderEvent)
 SKCenterEvent = SKCenterLibEvent()
 SKCenterLibEventHandler = comtypes.client.GetEvents(skC, SKCenterEvent)
 
+SKQuoteEvent=SKQuoteLibEvents()
+SKQuoteLibEventHandler = comtypes.client.GetEvents(skQ, SKQuoteEvent)
+
 class CapitalAPI:
   def __init__(self):
     self.config = {
@@ -60,6 +63,10 @@ class CapitalAPI:
   def init_reply_server(self):
     nErrorCode = skR.SKReplyLib_ConnectByID(self.config['id'])
     self.write_message("Reply", nErrorCode, "SKReplyLib_Connect")
+
+  def init_quote_server(self):
+    m_nCode = skQ.SKQuoteLib_EnterMonitor()
+    self.write_message("Quote", m_nCode, "SKQuoteLib_EnterMonitor")
 
   def initialize_SKOrderLib(self):
     print("Initializing SKOrderLib")
@@ -167,6 +174,7 @@ if __name__ == "__main__":
   api.login(id, password)
   api.set_account(account)
   api.init_reply_server()
+  api.init_quote_server()
   api.init_order()
   #api.buy_at_market()
   #api.sell_at_market(2)
