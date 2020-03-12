@@ -1,8 +1,8 @@
 import os
 import comtypes.client
-import SKReplyLibEvent
-import SKOrderLibEvent
-import SKCenterLibEvent
+from SKReplyLibEvent import SKReplyLibEvent
+from SKOrderLibEvent import SKOrderLibEvent
+from SKCenterLibEvent import SKCenterLibEvent
 from datetime import datetime
 
 class CapitalAPI:
@@ -147,7 +147,7 @@ if __name__ == "__main__":
   password = ""
   account = ""
   api = CapitalAPI()
-  api.login()
+  api.login(id, password)
   api.set_account(account)
   api.initialize_SKOrderLib()
   api.buy_at_market()
