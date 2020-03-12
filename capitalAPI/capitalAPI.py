@@ -144,7 +144,7 @@ if __name__ == "__main__":
   password = ""
   account = ""
   api = CapitalAPI()
-  api.login()
+  api.login(id, password)
   api.set_account(account)
   api.initialize_SKOrderLib()
   api.buy_at_market()
