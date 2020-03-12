@@ -138,6 +138,17 @@ class CapitalAPI:
     except Exception as e:
       print("error！" + str(e))
 
+  '''
+    nCoinType: ALL(0), NTD(1), RMB(2)
+  '''
+  def get_rights(self):
+    try:
+      nCoinType = 1
+      m_nCode = skO.GetFutureRights(self.config['id'], self.config['account'], nCoinType)
+      self.write_message("Order", m_nCode, "GetFutureRights")
+    except Exception as e:
+      print("Error！" + str(e))
+
   def write_message(self, str_type, nCode, str_message):
     str_info = ""
     if (nCode != 0):
