@@ -107,7 +107,7 @@ class CapitalAPI:
       oOrder.sReserved = 0  # T&&T+1
 
       message, m_nCode = skO.SendFutureOrder(self.config['id'], bAsyncOrder, oOrder)
-      self.write_message("Order", m_nCode, "SendFutureOrder", "")
+      self.write_message("Order", m_nCode, "SendFutureOrder")
     except Exception as e:
       print("error！" + str(e))
 
@@ -144,7 +144,7 @@ if __name__ == "__main__":
   api.login(id, password)
   api.set_account(account)
   api.init_order()
-  exit()
+  #exit()
   api.buy_at_market()
   api.sell_at_market(2)
   for i in range(30):
