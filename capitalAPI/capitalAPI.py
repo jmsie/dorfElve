@@ -7,7 +7,7 @@ from datetime import datetime
 
 class CapitalAPI:
   def __init__(self):
-    comtypes.client.GetModule(os.path.split(os.path.realpath(__file__))[0] + r"/SKCOM.dll")
+    comtypes.client.GetModule(os.path.split(os.path.realpath(__file__))[0] + r"/x64/SKCOM.dll")
     import comtypes.gen.SKCOMLib as sk
     self.skC = comtypes.client.CreateObject(sk.SKCenterLib, interface=sk.ISKCenterLib)
     self.skOOQ = comtypes.client.CreateObject(sk.SKOOQuoteLib, interface=sk.ISKOOQuoteLib)
