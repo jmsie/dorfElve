@@ -26,7 +26,7 @@ class SKReplyLibEvent():
         # " 委託書號 " : cutData[10]," 價格 " : cutData[11] , " 數量 " : cutData[20] ,
         #" 日期&時間 " : cutData[23] + " " +cutData[24] , "錯誤訊息" : cutData[-4] + " " + cutData[-3]}
         #WriteMessage( strMsg,ReplyInformation)
-        print("OnNewData"+"\n"+cutData)
+        print("OnNewData"+"\n"+str(cutData))
 
     def OnSolaceReplyDisconnect(self,btrUserID, nErrorCode):
         if nErrorCode == 3002:
