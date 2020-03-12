@@ -141,4 +141,19 @@ class CapitalAPI:
     print("【" + str_type + "】【" + str_message + "】【"
           + self.skC.SKCenterLib_GetReturnCodeMessage(nCode) + "】" + str_info)
 
+if __name__ == "__main__":
+  import  time;
+  id = ""
+  password = ""
+  account = ""
+  api = CapitalAPI()
+  api.login()
+  api.set_account(account)
+  api.initialize_SKOrderLib()
+  api.buy_at_market()
+  api.sell_at_market(2)
+  for i in range(30):
+    api.get_open_interest()
+    time.sleep(1)
+
 
