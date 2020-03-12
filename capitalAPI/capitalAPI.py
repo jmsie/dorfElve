@@ -1,5 +1,8 @@
 import os
 import comtypes.client
+from .events import SKReplyLibEvent
+from .events import SKOrderLibEvent
+from .events import SKCenterLibEvent
 
 class CapitalAPI:
   def __init__(self):
@@ -11,6 +14,18 @@ class CapitalAPI:
     self.skOSQ = comtypes.client.CreateObject(sk.SKOSQuoteLib, interface=sk.ISKOSQuoteLib)
     self.skQ = comtypes.client.CreateObject(sk.SKQuoteLib, interface=sk.ISKQuoteLib)
     self.skR = comtypes.client.CreateObject(sk.SKReplyLib, interface=sk.ISKReplyLib)
+
+    # comtypes使用此方式註冊callback
+    SKReplyEvent = SKReplyLibEvent()
+    SKReplyLibEventHandler = comtypes.client.GetEvents(self.skR, SKReplyEvent)
+
+    # comtypes使用此方式註冊callback
+    SKOrderEvent = SKOrderLibEvent()
+    SKOrderLibEventHandler = comtypes.client.GetEvents(self.skO, SKOrderEvent)
+
+    # comtypes使用此方式註冊callback
+    SKCenterEvent = SKCenterLibEvent()
+    SKCenterLibEventHandler = comtypes.client.GetEvents(self.skC, SKCenterEvent)
 
     self.config = {
       "id": "",
@@ -112,6 +127,5 @@ class CapitalAPI:
       str_info = "【" + self.skC.SKCenterLib_GetLastLogInfo() + "】"
     print("【" + str_type + "】【" + str_message + "】【"
           + self.skC.SKCenterLib_GetReturnCodeMessage(nCode) + "】" + str_info)
-
 
 
