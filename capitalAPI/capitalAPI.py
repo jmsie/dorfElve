@@ -15,6 +15,7 @@ class CapitalAPI:
     self.config = {
       "id": "",
       "account": "",
+      "symbol": "MXF01",
       "quantity_limit": "10", # quantity and order num / sec
     }
 
@@ -77,7 +78,26 @@ class CapitalAPI:
     except Exception as e:
       print ("error！" + e)
 
+  '''
+    sBuySell: sell(0), buy(1)
+    sTradeType: ROD(0), IOC(1), FOK(2)
+    sDayTrade: true(1), false(0)
+  '''
+  def send_future_order(self, sBuySell, sTradeType, sDayTrade, quantity, bAsyncOrder=False):
+    try:
+      oOrder = self.sk.FUTUREORDER()
+      oOrder.bstrFullAccount = self.config['account']
+      oOrder.bstrStockNo = self.config['symbol']
+      oOrder.sBuySell = sBuySell
+      oOrder.sTradeType = sTradeType
+      oOrder.sDayTrade = sDayTrade
+      oOrder.bstrPrice = ""
+      oOrder.nQty = quantity
 
+      message, m_nCode = self.skO.SendFutureOrder(self.config['id'], bAsyncOrder, oOrder)
+      self.write_message("Order", m_nCode, "SendFutureOrder", self.__dOrder[''])
+    except Exception as e:
+      print("error！" + e)
 
 
   def write_message(self, str_type, nCode, str_message):
@@ -86,4 +106,6 @@ class CapitalAPI:
       str_info = "【" + self.skC.SKCenterLib_GetLastLogInfo() + "】"
     print("【" + str_type + "】【" + str_message + "】【"
           + self.skC.SKCenterLib_GetReturnCodeMessage(nCode) + "】" + str_info)
+
+
 
