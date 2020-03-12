@@ -56,6 +56,10 @@ class CapitalAPI:
     self.read_cert()
     self.set_order_limit()
 
+  def init_reply_server(self):
+    nErrorCode = skR.SKReplyLib_ConnectByID(self.config['id'])
+    self.write_message("Reply", nErrorCode, "SKReplyLib_Connect")
+
   def initialize_SKOrderLib(self):
     print("Initializing SKOrderLib")
     m_nCode = skO.SKOrderLib_Initialize()
@@ -143,6 +147,7 @@ if __name__ == "__main__":
   api = CapitalAPI()
   api.login(id, password)
   api.set_account(account)
+  api.init_reply_server()
   api.init_order()
   #api.buy_at_market()
   #api.sell_at_market(2)
