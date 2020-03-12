@@ -54,7 +54,7 @@ class CapitalAPI:
       m_nCode = self.skO.ReadCertByID(self.config['id'])
       self.write_message("Order", m_nCode, "ReadCertByID")
     except Exception as e:
-      print(("error！" + e)
+      print("error！" + e)
 
   def set_order_limit(self, limit=10):
     try:
@@ -99,6 +99,12 @@ class CapitalAPI:
     except Exception as e:
       print("error！" + e)
 
+  def get_open_interest(self):
+    try:
+      m_nCode = self.skO.GetOpenInterest(self.config['id'], self.config['account'])
+      self.write_message("Order", m_nCode, "GetOpenInterest")
+    except Exception as e:
+      print("error！" + e)
 
   def write_message(self, str_type, nCode, str_message):
     str_info = ""
