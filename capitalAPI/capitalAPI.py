@@ -181,6 +181,7 @@ if __name__ == "__main__":
   #api.buy_at_market()
   #api.sell_at_market(2)
   api.get_open_interest()
+  api.get_rights()
 
   for i in range(15):
     time.sleep(1)
