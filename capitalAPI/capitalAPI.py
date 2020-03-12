@@ -144,10 +144,10 @@ if __name__ == "__main__":
   api.login(id, password)
   api.set_account(account)
   api.init_order()
-  api.buy_at_market()
-  api.sell_at_market(2)
+  #api.buy_at_market()
+  #api.sell_at_market(2)
   api.get_open_interest()
   while(1):
-    pass
+    time.sleep(1)
 
 

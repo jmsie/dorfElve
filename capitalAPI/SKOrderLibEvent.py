@@ -12,7 +12,7 @@ class SKOrderLibEvent():
         print(bstrAccountData)
 
     def OnOpenInterest(self,bstrData):
-        print(bstrData)
+        print("OnOpenInterest: " + bstrData)
 
     def OnFutureRights(self,bstrData):
         print(bstrData);
