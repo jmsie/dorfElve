@@ -3,6 +3,7 @@ import comtypes.client
 from .events import SKReplyLibEvent
 from .events import SKOrderLibEvent
 from .events import SKCenterLibEvent
+from datetime import datetime
 
 class CapitalAPI:
   def __init__(self):
@@ -34,6 +35,8 @@ class CapitalAPI:
       "quantity_limit": "10", # quantity and order num / sec
     }
 
+  def set_account(self, account):
+    self.config['account'] = account
 
   def login(self, id, password):
     try:
@@ -98,7 +101,7 @@ class CapitalAPI:
     sTradeType: ROD(0), IOC(1), FOK(2)
     sDayTrade: true(1), false(0)
   '''
-  def send_future_order(self, sBuySell, sTradeType, sDayTrade, quantity, bAsyncOrder=False):
+  def send_future_order(self, sBuySell, sTradeType, sDayTrade, quantity, bstrPrice="M", bAsyncOrder=False):
     try:
       oOrder = self.sk.FUTUREORDER()
       oOrder.bstrFullAccount = self.config['account']
@@ -106,13 +109,23 @@ class CapitalAPI:
       oOrder.sBuySell = sBuySell
       oOrder.sTradeType = sTradeType
       oOrder.sDayTrade = sDayTrade
-      oOrder.bstrPrice = ""
+      oOrder.bstrPrice = bstrPrice
       oOrder.nQty = quantity
+      oOrder.sNewClose = 2  # AUTO
+      oOrder.sReserved = 0  # T&&T+1
 
       message, m_nCode = self.skO.SendFutureOrder(self.config['id'], bAsyncOrder, oOrder)
       self.write_message("Order", m_nCode, "SendFutureOrder", self.__dOrder[''])
     except Exception as e:
       print("error！" + e)
+
+  def buy_at_market(self, quantity=1):
+    print("{}\tBuy {} at market".format(datetime.now(), quantity))
+    self.send_future_order(1, 1, 0, quantity)
+
+  def sell_at_market(self, quantity=1):
+    print("{}\tSell {} at market".format(datetime.now(), quantity))
+    self.send_future_order(0, 1, 0, quantity)
 
   def get_open_interest(self):
     try:
