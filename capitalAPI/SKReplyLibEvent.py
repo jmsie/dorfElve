@@ -14,9 +14,10 @@ class SKReplyLibEvent():
             strMsg = nErrorCode
         print(strMsg)
 
-    def OnReplyMessage(self,bstrUserID, bstrMessages):
-        sConfirmCode = -1
-        print(bstrUserID + ": " + bstrMessages)
+    def OnReplyMessage(self, bstrUserID, bstrMessage, sConfirmCode=0xFFFF):
+        #根據API 手冊，login 前會先檢查這個 callback,
+        #要返回 VARIANT_TRUE 給 server,  表示看過公告了，我預設返回值是 0xFFFF
+        print('OnReplyMessage', bstrUserID, bstrMessage)
         return sConfirmCode
 
     def OnNewData(self,btrUserID,bstrData):
