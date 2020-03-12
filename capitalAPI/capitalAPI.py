@@ -1,8 +1,10 @@
 import os
+import sys
+sys.path.append('.events')
 import comtypes.client
-from .events import SKReplyLibEvent
-from .events import SKOrderLibEvent
-from .events import SKCenterLibEvent
+import SKReplyLibEvent
+import SKOrderLibEvent
+import SKCenterLibEvent
 from datetime import datetime
 
 class CapitalAPI:
@@ -31,7 +33,7 @@ class CapitalAPI:
     self.config = {
       "id": "",
       "account": "",
-      "symbol": "MXF01",
+      "symbol": "MTX00",
       "quantity_limit": "10", # quantity and order num / sec
     }
 
