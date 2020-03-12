@@ -20,6 +20,7 @@ class SKReplyLibEvent():
         print('OnReplyMessage', bstrUserID, bstrMessage)
         return sConfirmCode
 
+    '''
     def OnNewData(self,btrUserID,bstrData):
         cutData = bstrData.split(',')
         #strMsg = {" 委託序號 ": cutData[0] , " 委託種類 " : cutData[2] , " 委託狀態 " : cutData[3] ," 商品代碼 " : cutData[8] ,
@@ -27,6 +28,7 @@ class SKReplyLibEvent():
         #" 日期&時間 " : cutData[23] + " " +cutData[24] , "錯誤訊息" : cutData[-4] + " " + cutData[-3]}
         #WriteMessage( strMsg,ReplyInformation)
         print("OnNewData"+"\n"+str(cutData))
+    '''
 
     def OnSolaceReplyDisconnect(self,btrUserID, nErrorCode):
         if nErrorCode == 3002:
