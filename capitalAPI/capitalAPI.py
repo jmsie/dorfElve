@@ -89,7 +89,7 @@ class CapitalAPI:
       print ("error！" + str(e))
 
   '''
-    sBuySell: sell(0), buy(1)
+    sBuySell: sell(1), buy(0)
     sTradeType: ROD(0), IOC(1), FOK(2)
     sDayTrade: true(1), false(0)
   '''
@@ -113,11 +113,11 @@ class CapitalAPI:
 
   def buy_at_market(self, quantity=1):
     print("{}\tBuy {} at market".format(datetime.now(), quantity))
-    self.send_future_order(1, 1, 0, quantity)
+    self.send_future_order(0, 1, 0, quantity)
 
   def sell_at_market(self, quantity=1):
     print("{}\tSell {} at market".format(datetime.now(), quantity))
-    self.send_future_order(0, 1, 0, quantity)
+    self.send_future_order(1, 1, 0, quantity)
 
   def get_open_interest(self):
     try:
