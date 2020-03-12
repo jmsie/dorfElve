@@ -140,9 +140,11 @@ class CapitalAPI:
 
 if __name__ == "__main__":
   import  time;
-  id = ""
-  password = ""
-  account = ""
+  from config import config
+  id = config['id']
+  password = config['password']
+  account = config['account']
+
   api = CapitalAPI()
   api.login(id, password)
   api.set_account(account)
